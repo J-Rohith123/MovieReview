@@ -1,0 +1,78 @@
+.home{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container{
+    display: flex;
+    position: relative;
+    justify-content: left;
+    flex-wrap: wrap;
+    gap: 2%;
+}
+#movies{
+    width: 18%;
+    aspect-ratio: 1;
+    position: relative;
+    aspect-ratio: 0.7;
+    margin-bottom: 3%;
+    object-fit: contain;
+}
+#movies img{
+    width: 100%;
+    align-self: center;
+    align-items: center;
+    height: 100%;
+    object-fit: fill;
+    object-position: center center;
+    
+}
+.content{
+    width: 100%;
+    
+    visibility: hidden;
+    top: 25%;
+    justify-content: flex-start;
+    padding: 5%;
+    gap: 1%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    transition: ease-in;
+}
+.content .card-title{
+    width: fit-content;
+    color: white;
+    text-align: left;
+}
+#movies:hover{
+    cursor: pointer;
+    border-color: gold;
+}
+#movies:hover img{
+    opacity: 0.4;
+}
+#movies:hover .content{
+  
+  visibility: visible;
+}
+.loading{
+    position: absolute;
+    top: 30%;
+    left:30%;
+}
+#movies .light{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    
+}
+
+#movies:hover .light{
+    background: linear-gradient(
+        90deg,
+        gold 15%,
+        transparent 85%
+    );
+    opacity: 0.4;
+}

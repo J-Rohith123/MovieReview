@@ -1,0 +1,36 @@
+.navbar-brand{
+    width: 30%;
+}
+#logo{
+    width: 10%;
+    aspect-ratio: 1;
+}
+#searchcontainer{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+   
+}
+#suggestions{
+    position: absolute;
+    width: 72%;
+    padding: 1%;
+    height: fit-content;
+    max-height: 250px;
+    background-color: white;
+    top: 35px;
+    overflow-y: auto;
+    border-radius: 0 0 10px 10px;
+    background: rgb(0,0,0);
+background: radial-gradient(circle, rgba(0,0,0,1) 77%, rgba(0,0,0,0.8577556022408963) 100%);
+}
+#suggestedmovie{
+    margin: 0;
+    padding: 5px;
+}
+#suggestedmovie:hover{
+    color: gold;
+    border: 1px solid gold;
+    border-radius: 10px;
+    cursor: pointer;
+}

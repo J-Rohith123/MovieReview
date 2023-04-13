@@ -1,0 +1,159 @@
+
+
+.login-dark {
+    height: 400px;
+    background-size:cover;
+    position:relative;
+  }
+  
+  .login-dark form {
+    max-width:320px;
+    width:90%;
+    background-color:#1e2833;
+    padding:40px;
+    border-radius:4px;
+    transform:translate(-50%, -50%);
+    position:absolute;
+    top:50%;
+    left:50%;
+    color:#fff;
+    box-shadow:3px 3px 4px rgba(0,0,0,0.2);
+  }
+  
+  .login-dark .illustration {
+    text-align:center;
+    padding:15px 0 20px;
+    font-size:100px;
+    color:#2980ef;
+  }
+  
+  .login-dark form .form-control {
+    background:none;
+    border:none;
+    border-bottom:1px solid #434a52;
+    border-radius:0;
+    box-shadow:none;
+    outline:none;
+    color:inherit;
+  }
+  
+  .login-dark form .btn-primary {
+    background:#214a80;
+    border:none;
+    border-radius:4px;
+    padding:11px;
+    box-shadow:none;
+    margin-top:26px;
+    text-shadow:none;
+    outline:none;
+  }
+  
+  .login-dark form .btn-primary:hover, .login-dark form .btn-primary:active {
+    background:#214a80;
+    outline:none;
+  }
+  
+  .login-dark form .forgot {
+    display:block;
+    text-align:center;
+    font-size:12px;
+    color:#6f7a85;
+    opacity:0.9;
+    text-decoration:none;
+  }
+  
+  .login-dark form .forgot:hover, .login-dark form .forgot:active {
+    opacity:1;
+    text-decoration:none;
+  }
+  
+  .login-dark form .btn-primary:active {
+    transform:translateY(1px);
+  }
+  
+  
+  .myform{
+    margin-left:35%;
+    margin-right:35%;
+    margin-top:1%;
+    border-radius:10px;
+    background-color:lightcyan;
+    padding:2%
+  }
+  .signincss{
+    text-align: center;
+    margin-left:30%;
+    margin-right:30%;
+    margin-top:10%;
+    border-radius:10px;
+    background-color:lightcyan;
+    padding:1%
+  }
+
+  @media screen and (max-width : 750px ) {
+    .myform{
+      margin-left:25%;
+    margin-right:25%;
+    margin-top:1%;
+    border-radius:10px;
+    background-color:lightcyan;
+    padding:2%
+    }
+    .card{
+      width:30%;
+    float:left;
+    background-color:#DCD6F7;
+    margin-bottom:2%;
+    text-align:center;
+    margin-left:2.5%;
+    transform: scale(1.01);
+    transition: transform 500ms ease;
+    border-radius: 1.5em;
+    }
+  }
+  
+
+  @media screen and (max-width : 550px ) {
+    .signincss{
+      text-align: center;
+      margin-left:20%;
+      margin-right:20%;
+      margin-top:10%;
+      border-radius:10px;
+      background-color:lightcyan;
+      padding:1%
+    }
+    .myform{
+      margin-left:20%;
+    margin-right:20%;
+    margin-top:1%;
+    border-radius:10px;
+    background-color:lightcyan;
+    padding:2%
+    }
+    .card{
+      width:39.5%;
+    float:left;
+    background-color:#DCD6F7;
+    margin-bottom:2%;
+    text-align:center;
+    margin-left:7%;
+    transform: scale(1.01);
+    transition: transform 500ms ease;
+    border-radius: 1.5em;
+    }
+  }
+
+  @media screen and (max-width:450px) {
+    .card{
+      width:80%;
+    float:left;
+    background-color:#DCD6F7;
+    margin-bottom:2%;
+    text-align:center;
+    margin-left:10%;
+    transform: scale(1.01);
+    transition: transform 500ms ease;
+    border-radius: 1.5em;
+    } 
+  }
