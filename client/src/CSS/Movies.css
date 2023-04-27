@@ -1,5 +1,7 @@
 #moviescontainer{
+    flex: 6;
     display: flex;
+    position: relative;
     padding: 1%;
     gap: 10px;
     margin-top: 1%;
@@ -47,4 +49,24 @@ margin: 0;
 #moviecard:hover{
     background: rgb(245,235,22);
 background: radial-gradient(circle, rgba(245,235,22,0) 0%, rgba(39,233,188,0.24431022408963587) 100%);
+}
+#filter{
+    flex: 1;
+    height: 400px;
+    justify-content: left;
+    padding: 1%;
+    width: 98%;
+    margin: 1%;
+    display: flex;
+    padding-top: 30px;
+    border-radius: 10px;
+    background: rgb(0,0,0);
+background: radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(255,255,255,0.23030462184873945) 100%);
+}
+#filterlist{
+    background-color: transparent;
+    border: none;
+}
+#filterlist li{
+    background-color: transparent;
 }

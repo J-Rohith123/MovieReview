@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 
 export function getMovies(){
     return(dispatch)=>{
-        axios.get("http://localhost:3001/movies")
+        axios.get("http://localhost:3005/movies")
         .then(res => {
             dispatch({type:'getmovies',payload:res.data})
         })
@@ -14,7 +14,7 @@ export function getMovies(){
 
 export function getUsers(){
     return(dispatch)=>{
-        axios.get("http://localhost:3001/users")
+        axios.get("http://localhost:3005/users")
         .then(res => {
             dispatch({type:'getusers',payload:res.data})
         })
@@ -23,22 +23,23 @@ export function getUsers(){
 }
 
 export function addUser(val){
+    console.log(val)
     return(dispatch)=>{
-        axios.post("http://localhost:3001/users",val)
+        axios.post("http://localhost:3005/users",val)
         .then(res => dispatch({type:'addUser',payload:val}))
         .catch(err => console.log(err))
     }
 }
 export function addMovie(val){
     return(dispatch)=>{
-        axios.post("http://localhost:3001/movies",val)
+        axios.post("http://localhost:3005/movies",val)
         .then(res => dispatch({type:'addmovie',payload:val}))
         .catch(err => console.log(err))
     }
 }
 export function deleteMovie(id){
     return(dispatch)=>{
-        axios.delete(`http://localhost:3001/movies/${id}`)
+        axios.delete(`http://localhost:3005/movies/${id}`)
         .then(res => dispatch({type:'deletemovie',payload:id}))
         .catch(err => console.log(err))
     }
@@ -46,7 +47,7 @@ export function deleteMovie(id){
 export function setUser(id){
     
     return(dispatch)=>{
-        axios.get(`http://localhost:3001/users/${id}`)
+        axios.get(`http://localhost:3005/users/${id}`)
         .then(res =>{ 
             Cookies.set("LoggedUser",id)
             dispatch({type:'setuser',payload:res.data})
@@ -57,7 +58,7 @@ export function setUser(id){
 export function getOneMovie(id){
     
     return(dispatch)=>{
-        axios.get(`http://localhost:3001/movies/${id}`)
+        axios.get(`http://localhost:3005/movies/${id}`)
         .then(res =>{ 
             dispatch({type:'getmovie',payload:res.data})
         })
@@ -74,22 +75,22 @@ export function loggedOut(){
 export function addReview(review){
     console.log(review)
     return(dispatch)=>{
-      axios.post('http://localhost:3001/reviews',review)
+      axios.post('http://localhost:3005/reviews',review)
       .then(res => dispatch({type:'addreview',payload:{...review}}))
       .catch(err => console.log("error: ",err))
     }
 }
 export function getReviews(mid){
     return(dispatch)=>{
-        axios.get(`http://localhost:3001/reviews/${mid}`)
+        axios.get(`http://localhost:3005/reviews/${mid}`)
         .then(res => dispatch({type:'setreviews',payload:res.data}))
         .catch(err => console.log("error: ",err))
     }
 }
 export function UpdateMovie(movie,id){
-    
+    console.log(movie)
     return(dispatch)=>{
-        axios.put(`http://localhost:3001/movies/${id}`,movie)
+        axios.put(`http://localhost:3005/movies/${id}`,movie)
         .then(res => dispatch({type:'updateMovie',payload:res.data}))
         .catch(err => console.log("error: ",err))
     }
@@ -98,7 +99,7 @@ export function UpdateMovie(movie,id){
 export function UpdateUser(user,id){
     
     return(dispatch)=>{
-        axios.put(`http://localhost:3001/users/${id}`,user)
+        axios.put(`http://localhost:3005/users/${id}`,user)
         .then(res => dispatch({type:'updateuser',payload:res.data}))
         .catch(err => console.log("error: ",err))
     }
@@ -106,7 +107,7 @@ export function UpdateUser(user,id){
 
 export function deleteReview(id){
     return(dispatch)=>{
-        axios.delete(`http://localhost:3001/reviews/${id}`)
+        axios.delete(`http://localhost:3005/reviews/${id}`)
         .then(res => dispatch({type:'deletereview',payload:id}))
         .catch(err => console.log(err))
     }

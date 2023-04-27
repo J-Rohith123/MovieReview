@@ -17,10 +17,10 @@ const movies=useSelector(state => state?.movies)
     <div className='container'>
      
     {
-         movies?.length==0 ? <LoadingGif/> : movies?.map((movie)=>
+         movies?.length===0 ? <LoadingGif/> : movies?.map((movie)=>
          <div key={movie.id} className='card' id='movies' onClick={()=> navigate("movies/"+movie.title,{state:movie._id}) } style={{backgroundColor:'transparent'}}>
           <div className='light' ></div>
-            <img className='image-responsive image-resize' src={movie.poster} ></img>
+            <img className='image-responsive image-resize' style={{borderRadius:'10px'}} src={movie.poster} alt='poster' ></img>
             <div className='content'>
            <p className='card-title' style={{color:'gold',fontWeight:'700'}} >{movie.title}</p>
            <p className='card-title'><b>Rating:</b> ⭐{movie.rating}</p>
@@ -35,7 +35,7 @@ const movies=useSelector(state => state?.movies)
 }
 function LoadingGif(){
   return(
-    <img className='loading' src='images/loading.webp' ></img>
+    <img className='loading' src='images/loading.webp' alt='loading' ></img>
   )
 }
 export default Home

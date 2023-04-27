@@ -1,5 +1,8 @@
 import User from '../models/userSchema.js'
 import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+
 
 export async function getUsers(req,res){
   try{
@@ -12,13 +15,29 @@ export async function getUsers(req,res){
 export async function addUser(req,res){
     try{
      const { fname,lname,phone,password,email }=req.body
-     const user=await User.create({fname,lname,phone,password,email,admin:false})
-     res.status(200).json(user)
+    
+     const salt=await bcrypt.genSalt(10)
+     const secpass= await bcrypt.hash(password,salt)
+     
+    
+     const user=await User.create({fname,lname,phone,password:secpass,email,admin:false})
+    const data={id:user._id}
+    const authToken=jwt.sign(data,process.env.SECRET_KEY)
+     res.status(200).json({authToken})
     }catch(err){
         res.status(400).json({error:err})
     }
 }
-
+export async function getUser(req,res){
+  try {
+    const userId=req.user
+    console.log(userId)
+    const user=await User.findById(userId).select("-password")
+    res.status(200).json(user)
+  } catch (error) {
+    res.status(400).json({error})
+  }
+}
 export async function getOneUser(req,res){
   const {id}= req.params
   try{
@@ -53,3 +72,4 @@ export async function updateUser(req,res){
       res.status(400).json({error:err})
   }
 }
+

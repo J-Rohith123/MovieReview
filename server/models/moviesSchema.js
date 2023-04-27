@@ -11,6 +11,6 @@ const moviesSchema=new Schema({
     rating:Number,
     overview:String,
     reviews:Array
-})
+},{timestamps:true})
 
 export default mongoose.model('Movie',moviesSchema)

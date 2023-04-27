@@ -4,6 +4,7 @@ import { useNavigate } from "react-router"
 import '../CSS/Auth.css'
 import * as actions from '../state/actions'
 import { toast  } from 'react-toastify'
+import axios from "axios"
 
 export default function SigninForm(){
     const users=useSelector(state => state?.users)
@@ -49,44 +50,89 @@ export default function SigninForm(){
           }
        
      }
-     const uservalidation=()=>{
+     const uservalidation=async()=>{
        
-      let userdata =  {email:'',password:''}
-      users.map(
-        user =>{
-          if(user.email === formvalues.email && user.password===formvalues.password )
-          { 
-              userdata=user
-          }
-        }
-       )
-       
+      // let userdata =  {email:'',password:''}
+      // users.map(
+      //   user =>{
+      //     if(user.email === formvalues.email && user.password===formvalues.password )
+      //     { 
+      //         userdata=user
+      //     }
+      //   }
+      //  )
 
-       if(userdata.email === ''){
-         toast.error("Invalid Login",{
-          position:"top-center",
-          autoClose:3000,
-          hideProgressBar:false,
-          closeOnClick:true,
-          pauseOnHover:false,
-          draggable:false,
-          progress:undefined,
-          theme:'dark'
-         })
-       }else{
-            dispatch(actions.setUser(userdata._id))
-            navigate('/')
-            toast.success("Logged in Successfully!!",{
-             position:"top-center",
-             autoClose:3000,
-             hideProgressBar:false,
-             closeOnClick:true,
-             pauseOnHover:false,
-             draggable:false,
-             progress:undefined,
-             theme:'dark'
-            })
-       }
+
+
+       let response=await (await axios.post('http://localhost:3005/login',{email:formvalues.email,password:formvalues.password})).data
+          
+       if(response.email){
+           if(response.auth){
+            dispatch(actions.setUser(response.userid))
+                  navigate('/')
+                  toast.success("Logged in Successfully!!",{
+                   position:"top-center",
+                   autoClose:3000,
+                   hideProgressBar:false,
+                   closeOnClick:true,
+                   pauseOnHover:false,
+                   draggable:false,
+                   progress:undefined,
+                   theme:'dark'
+                  })
+           }else{
+            toast.error("Invalid Password",{
+                  position:"top-center",
+                  autoClose:3000,
+                  hideProgressBar:false,
+                  closeOnClick:true,
+                  pauseOnHover:false,
+                  draggable:false,
+                  progress:undefined,
+                  theme:'dark'
+                 })
+           }
+        }else{
+          toast.error("Invalid Email",{
+                position:"top-center",
+                autoClose:3000,
+                hideProgressBar:false,
+                closeOnClick:true,
+                pauseOnHover:false,
+                draggable:false,
+                progress:undefined,
+                theme:'dark'
+               })
+        }
+
+
+
+
+      //  if(userdata.email === ''){
+      //    toast.error("Invalid Login",{
+      //     position:"top-center",
+      //     autoClose:3000,
+      //     hideProgressBar:false,
+      //     closeOnClick:true,
+      //     pauseOnHover:false,
+      //     draggable:false,
+      //     progress:undefined,
+      //     theme:'dark'
+      //    })
+      //  }else{
+      //       dispatch(actions.setUser(userdata._id))
+      //       navigate('/')
+      //       toast.success("Logged in Successfully!!",{
+      //        position:"top-center",
+      //        autoClose:3000,
+      //        hideProgressBar:false,
+      //        closeOnClick:true,
+      //        pauseOnHover:false,
+      //        draggable:false,
+      //        progress:undefined,
+      //        theme:'dark'
+      //       })
+      //  }
      }
     
     return(
@@ -99,7 +145,6 @@ export default function SigninForm(){
             <p style={{color:'red'}} >{errText.email}</p></div>
             <div class="form-group"><input class="form-control" type="password" name="password" value={ formvalues.password } onChange={ handlechange} placeholder="Password" />
             <p style={{color:'red'}} >{errText.password}</p></div>
-            <label htmlFor="admincheck" ><input type="checkbox" id="admincheck" /> I'm an Admin  </label>
             <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div><a href="/register" class="forgot">Haven't registerd yet?Register Here</a></form>
             
     </div>

@@ -63,6 +63,9 @@ const RenderMenu=(props)=>{
             } } >{movie.title}</p>
           )
         }
+        {
+          (movies?.filter(i=> i.title?.toLowerCase().includes(props.searchmovie)).length ===0)? <p>No matching movies</p>:null
+        }
       </div>
     )
   }
@@ -132,7 +135,7 @@ const RenderMenu=(props)=>{
         </li>
         <li class="nav-item dropdown ">
         <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="images/usericon.png" alt="Profile" style={{width:'50px',padding:'5%',height:'50px',backgroundColor:'whitesmoke'}} class="rounded-circle"/>
+            <img src="images/usericon.png" alt="Profile" style={{width:'50px',height:'50px',backgroundColor:'whitesmoke'}} class="rounded-circle"/>
           </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown" >
             <li><a class="dropdown-item" href="/profile">Profile</a></li>

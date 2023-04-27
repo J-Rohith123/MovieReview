@@ -60,17 +60,21 @@ export async function deleteMovie(){
 export async function updateMovie(req,res){
    
     try{
+      const {title,poster,director,year,bg_poster,rating,overview,reviews}=req.body
        const {id} = req.params
        
       if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(400).json({error:"No such movie found!"})
       }
-      const movie= await Movie.findOneAndUpdate({_id:id},{...req.body})
+      console.log(req.body)
+      const movie= await Movie.findOneAndUpdate({_id:id},{title,poster,director,year,bg_poster,rating,overview,reviews})
+      
       if(!movie){
         return res.status(400).json({error:"No such movie found!"})
       }
       res.status(200).json(movie)
     }catch(err){
+      console.log(err)
         res.status(400).json({error:err})
     }
 }

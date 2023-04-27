@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import '../CSS/Movies.css'
 import { useDispatch, useSelector } from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import * as actions from '../state/actions'
 import { toast  } from 'react-toastify'
+import Loading from './loading'
 
 function Movies(props) {
   const dispatch=useDispatch()
@@ -12,14 +13,29 @@ function Movies(props) {
   const [mymovies,setmymovies]=useState(movies)
   const admin=useSelector(state => state?.admin)
   const navigate=useNavigate()
+  
+  const [filters,setfilters]=useState({latest:true,rating:false,alpha:false})
   useEffect(()=>{
     dispatch(actions.getMovies())
   },[])
   
   useEffect(()=>{
-    setmymovies([...movies])
+    setmymovies([...movies].sort((a,b)=> b.year-a.year))
   },[movies])
   
+  useEffect(()=>{
+    let filterlist=[]
+    if(filters.rating){
+      filterlist=[...movies].sort((a,b)=> b.rating-a.rating)
+      setmymovies(filterlist)
+    }else if(filters.latest){
+      filterlist=[...movies].sort((a,b)=> b.year-a.year)
+      setmymovies(filterlist)
+    }else if(filters.alpha){
+      filterlist=[...movies].sort((a,b)=> a.title.localeCompare(b.title))
+      setmymovies(filterlist)
+    }
+  },[filters])
   
   
 const deleteMovie=(e,id)=>{
@@ -29,7 +45,40 @@ const deleteMovie=(e,id)=>{
 }
 
   return (
+    <div style={{display:'flex',position:'relative'}} >
+      
+      <div className='container' id='filter' >
+      <div class="dropdown">
+  <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+    Filter
+  </button>
+  <ul class="dropdown-menu dropdown-menu-dark" id='filterlist' aria-labelledby="dropdownMenuButton2">
+    <li>Sort By:</li>
+    <li><hr class="dropdown-divider"/></li>
+    <li><div class="form-check">
+  <input class="form-check-input" type="radio" checked={filters.latest}  onChange={(e)=>setfilters({alpha:false,rating:false,latest:e.target.checked})} name="flexRadioDefault" id="flexRadioDefault1"/>
+  <label class="form-check-label" for="flexRadioDefault1">
+    Latest
+  </label>
+</div></li>
+<li><div class="form-check">
+  <input class="form-check-input" type="radio" checked={filters.rating} onChange={(e)=>setfilters({alpha:false,rating:e.target.checked,latest:false})} name="flexRadioDefault" id="flexRadioDefault2"/>
+  <label class="form-check-label" for="flexRadioDefault2">
+    Rating
+  </label>
+</div></li>
+<li><div class="form-check">
+  <input class="form-check-input" type="radio" checked={filters.alpha} onChange={(e)=>setfilters({alpha:e.target.checked,rating:false,latest:false})} name="flexRadioDefault" id="flexRadioDefault2"/>
+  <label class="form-check-label" for="flexRadioDefault2">
+    A-Z
+  </label>
+</div></li>
+    
+  </ul>
+</div>
+      </div>
     <div className='container' id='moviescontainer' >
+    
       <h1 className='text-light' style={{width:'85%',textAlign:'left'}} >Top Rated Movies:</h1>
       {
         admin ?<AddMovieModal/>:null
@@ -37,7 +86,7 @@ const deleteMovie=(e,id)=>{
       
      
       {
-        [...mymovies]?.sort((a,b)=> b.rating-a.rating )?.map(
+        [...mymovies]?.map(
           movie =>
            <div className='card bg-dark text-light' id='moviecard' >
           <img src={movie.poster} alt="poster" onClick={()=>navigate(movie.title,{state:movie._id})} ></img>
@@ -60,6 +109,7 @@ const deleteMovie=(e,id)=>{
         )
       }
       
+    </div>
     </div>
   )
 }
